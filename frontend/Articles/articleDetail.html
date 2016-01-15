@@ -1,0 +1,30 @@
+<!-- Article lookup -->
+<div id="article<%= id %>">
+    <h1 id="articleTitle"><%= title %></h1>
+    <h2 id="articleSubTitle" class="label label-danger"><%= subTitle %></h2>
+    <p id="articleContent" class="tooltip-text"><%= content %></p>
+    <a class="btn btn-default" data-internal="true" href="/Articles">Back to List</a>
+    <a class="btn btn-default" data-internal="true" href="/Articles/Update/<%= id %>">Update Article</a>
+    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#article<%= id %>DeleteModal">
+        Delete Article
+    </button>
+</div>
+
+<!-- Delete confirmation modal -->
+<div class="modal fade" id="article<%= id %>DeleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete article <strong><%= title %></strong>?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="deleteArticleButton" type="button" class="btn btn-danger" data-dismiss="modal">Yes, I'm sure</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+<% if (_.isUndefined(arguments[0].username)) { %>
+    <li>
+    	<a id="user-nav-tab" data-internal="true" href="/Login">
+    		<span class="fa fa-sign-in"></span>&nbsp;Login
+    	</a>
+    </li>
+<%  } else { %>
+    <li>
+    	<a id="user-nav-tab"data-internal="true" href="/User">
+    		<span class="fa fa-user">&nbsp;</span><%= username %>
+    	</a>
+    </li>    
+<%  } %>

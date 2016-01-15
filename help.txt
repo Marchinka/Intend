@@ -1,0 +1,24 @@
+WINDOWS - Come setuppare l'ambiente di sviluppo giorno per giorno
+
+1) Lanciare il web server tramite il comando:
+
+	node Documents\Projects\Web\Intend_new\app.js
+
+2) Lanciare il task di grunt in watch
+
+	cd Documents\Projects\Web\Intend_new
+	grunt watch
+
+3) Preparare le fixtures
+
+	cd Documents\Projects\Web\Intend_new
+	mocha
+
+4) Lanciare mongo db
+
+	cd ..\..\Program Files\MongoDB\Server\3.0\bin
+	mongod
+
+5) Aprire la console di mongo
+
+	cd ..\..\Program Files\MongoDB\Server\3.0\bin

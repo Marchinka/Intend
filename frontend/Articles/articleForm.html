@@ -1,0 +1,25 @@
+<!-- Article form -->
+<form role="form">
+    <div class="form-group">
+        <label data-tooltip="The article title. This text will be the page header and the main criteria for article researches." for="title">Title</label>
+        <input placeholder="Title" type="text" class="form-control error" id="title" name="title" value="<%= title %>">
+        <span class="help-block"></span>
+    </div>
+
+    <div class="form-group">
+        <label data-tooltip="The sub title of the article, immediately below the main title." for="subTitle">Sub Title</label>
+        <input placeholder="Sub Title" type="text" class="form-control" id="subTitle" name="subTitle" value="<%= subTitle %>">
+        <span class="help-block"></span>
+    </div>
+
+    <div class="form-group">
+        <label data-tooltip="The article content. There is no limit in length." for="content">Content</label>
+        <textarea placeholder="Article Content" rows="25" type="text" class="form-control" id="content" name="content"><%= content %></textarea>
+        <span class="help-block"></span>
+    </div>
+
+    <a data-internal="true" class="btn btn-default" href="/Articles">
+        Back to List
+    </a>
+    <input type="submit" class="btn btn-danger" value="Save" />
+</form>
