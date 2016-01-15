@@ -32,7 +32,7 @@ describe('Tooltip List Item View', function() {
 
             // EXERCISE
             var ErrorThrower = function (){
-                tooltipListItemView.render();
+                tooltipListItemView.renderHtml();
             };
 
             // ASSERT
@@ -51,7 +51,7 @@ describe('Tooltip List Item View', function() {
 
             // EXERCISE
             var ErrorThrower = function (){
-                tooltipListItemView.render();
+                tooltipListItemView.renderHtml();
             };
 
             // ASSERT
@@ -70,7 +70,7 @@ describe('Tooltip List Item View', function() {
 
             // EXERCISE
             var ErrorThrower = function (){
-                tooltipListItemView.render();
+                tooltipListItemView.renderHtml();
             };
 
             // ASSERT
@@ -89,7 +89,7 @@ describe('Tooltip List Item View', function() {
 
             // EXERCISE
             var ErrorThrower = function (){
-                tooltipListItemView.render();
+                tooltipListItemView.renderHtml();
             };
 
             // ASSERT
@@ -106,7 +106,7 @@ describe('Tooltip List Item View', function() {
                 el: document.body });
 
             // EXERCISE
-            tooltipListItemView.render();
+            tooltipListItemView.renderHtml();
 
             // ASSERT
             var title = document.getElementById("tooltip" + tooltip.id).innerHTML;
@@ -123,7 +123,7 @@ describe('Tooltip List Item View', function() {
                 el: document.body });
 
             // EXERCISE
-            tooltipListItemView.render();
+            tooltipListItemView.renderHtml();
 
             // ASSERT
             var title = document.getElementById("tooltipKey").innerHTML;
@@ -140,7 +140,7 @@ describe('Tooltip List Item View', function() {
                 el: document.body });
 
             // EXERCISE
-            tooltipListItemView.render();
+            tooltipListItemView.renderHtml();
 
             // ASSERT
             var title = document.getElementById("tooltipDescription").innerHTML;
@@ -155,7 +155,7 @@ describe('Tooltip List Item View', function() {
                 clickCallback: function () { },
                 model: tooltipModel, 
                 el: document.body });
-            tooltipListItemView.render();
+            tooltipListItemView.renderHtml();
             var errorMessage = "clickCallback is not defined";
             var spy = chai.spy.on(tooltipListItemView, "tooltipClick");
 

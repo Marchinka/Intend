@@ -52,15 +52,14 @@ var obj = {
         var attributes = self.model.toJSON();
         attributes.content = attributes.content.replace(/\n/g, "<br />");
         self.$el.html(self.template(attributes));
-
+        self.loadTooltips();
+        self.addTooltips();
     },
     render: function (attrs) {
         var id = attrs[0];
         var self = this;
         var fetchCallback = function () {
             self.renderHtml();
-            self.loadTooltips();
-            self.addTooltips();
         };
         var options = { reset: true, validate: true, success: fetchCallback };
         self.model.set({ id: id });

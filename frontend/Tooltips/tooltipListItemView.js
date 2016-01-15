@@ -19,11 +19,14 @@ var TooltipListItemView = {
         });
     },
     template: _.template(htmlTemplate),
-    render: function(){
+    renderHtml: function() {
         var self = this;
         var attributes = self.model.toJSON();
         self.$el.html(self.template(attributes));
         return self.$el.html();
+    },
+    render: function () {
+        this.renderHtml();
     }
 };
 

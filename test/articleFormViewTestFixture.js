@@ -18,7 +18,7 @@ describe('Article Form View', function() {
         ArticleFormView = require("../frontend/Articles/articleFormView.js");
     });
 
-    describe('Render()', function() {
+    describe('renderHtmlHtml()', function() {
 
         it('Throws exception with json without title as input', function (done) {
             // SETUP
@@ -29,7 +29,7 @@ describe('Article Form View', function() {
 
             // EXERCISE
             var ErrorThrower = function (){
-                articleView.render();
+                articleView.renderHtml();
             };
 
             // ASSERT
@@ -46,7 +46,7 @@ describe('Article Form View', function() {
 
             // EXERCISE
             var ErrorThrower = function (){
-                articleView.render();
+                articleView.renderHtml();
             };
 
             // ASSERT
@@ -63,7 +63,7 @@ describe('Article Form View', function() {
 
             // EXERCISE
             var ErrorThrower = function (){
-                articleView.render();
+                articleView.renderHtml();
             };
 
             // ASSERT
@@ -78,7 +78,7 @@ describe('Article Form View', function() {
             var articleView = new ArticleFormView({model: articleModel, el: document.body});
 
             // EXERCISE
-            articleView.render();
+            articleView.renderHtml();
 
             // ASSERT
             var title = document.getElementsByName("title")[0].value;
@@ -93,7 +93,7 @@ describe('Article Form View', function() {
             var articleView = new ArticleFormView({model: articleModel, el: document.body});
 
             // EXERCISE
-            articleView.render();
+            articleView.renderHtml();
 
             // ASSERT
             var subTitle = document.getElementsByName("subTitle")[0].value;
@@ -108,7 +108,7 @@ describe('Article Form View', function() {
             var articleView = new ArticleFormView({model: articleModel, el: document.body});
 
             // EXERCISE
-            articleView.render();
+            articleView.renderHtml();
 
             // ASSERT
             var content = document.getElementsByName("content")[0].value;

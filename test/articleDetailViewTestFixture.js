@@ -22,7 +22,7 @@ describe('Article Detail View', function() {
         $ = require('jquery');
     });
 
-    describe('Render()', function() {
+    describe('renderHtml()', function() {
 
         it('Throws exception with json without id as input', function () {
             // SETUP
@@ -33,7 +33,7 @@ describe('Article Detail View', function() {
 
             // EXERCISE
             var ErrorThrower = function (){
-                articleView.render();
+                articleView.renderHtml();
             };
 
             // ASSERT
@@ -49,7 +49,7 @@ describe('Article Detail View', function() {
 
             // EXERCISE
             var ErrorThrower = function (){
-                articleView.render();
+                articleView.renderHtml();
             };
 
             // ASSERT
@@ -65,7 +65,7 @@ describe('Article Detail View', function() {
 
             // EXERCISE
             var ErrorThrower = function (){
-                articleView.render();
+                articleView.renderHtml();
             };
 
             // ASSERT
@@ -80,7 +80,7 @@ describe('Article Detail View', function() {
 
             // EXERCISE
             var SafeCode = function(){
-                articleView.render();
+                articleView.renderHtml();
             };
 
             // ASSERT
@@ -95,7 +95,7 @@ describe('Article Detail View', function() {
             var spy = chai.spy.on(articleView, "loadTooltips");
 
             // EXERCISE
-            articleView.render();
+            articleView.renderHtml();
 
             // ASSERT
             expect(spy).to.have.been.called();
@@ -109,7 +109,7 @@ describe('Article Detail View', function() {
             var spy = chai.spy.on(articleView, "addTooltips");
 
             // EXERCISE
-            articleView.render();
+            articleView.renderHtml();
 
             // ASSERT
             expect(spy).to.have.been.called();
@@ -122,7 +122,7 @@ describe('Article Detail View', function() {
             var articleView = new ArticleDetailView({model: articleModel, el: document.body});
 
             // EXERCISE
-            articleView.render();
+            articleView.renderHtml();
 
             // ASSERT
             var title = document.getElementById("articleTitle").innerHTML;
@@ -136,7 +136,7 @@ describe('Article Detail View', function() {
             var articleView = new ArticleDetailView({model: articleModel, el: document.body});
 
             // EXERCISE
-            articleView.render();
+            articleView.renderHtml();
 
             // ASSERT
             var title = document.getElementById("articleSubTitle").innerHTML;
@@ -150,7 +150,7 @@ describe('Article Detail View', function() {
             var articleView = new ArticleDetailView({model: articleModel, el: document.body});
 
             // EXERCISE
-            articleView.render();
+            articleView.renderHtml();
 
             // ASSERT
             var title = document.getElementById("articleContent").innerHTML;

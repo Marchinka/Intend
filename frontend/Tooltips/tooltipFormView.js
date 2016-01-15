@@ -55,16 +55,16 @@ var obj = {
     render: function (params) {
         var self = this;
         var id = params[0];
-        if (id) {
+        if (!params || !params[0]) {
+            self.model.set({ id: null, tooltipKey: null, description: null });
+            self.renderHtml();
+        } else {
             var fetchCallback = function () {
                 self.renderHtml();
             };
             self.model.set({ id: id });
             var options = { reset: true, validate: true, success: fetchCallback };
-            self.model.fetch(options);
-        } else {
-            self.model.set({ id: null, tooltipKey: null, description: null });
-            self.renderHtml();
+            self.model.fetch(options); 
         }
     }
 };

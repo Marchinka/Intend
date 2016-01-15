@@ -18,7 +18,7 @@ describe('Tooltip Form View', function() {
         TooltipFormView = require("../frontend/Tooltips/tooltipFormView.js");
     });
 
-    describe('Render()', function() {
+    describe('renderHtml()', function() {
 
         it('Throws exception with json without tooltipKey as input', function () {
             // SETUP
@@ -29,7 +29,7 @@ describe('Tooltip Form View', function() {
 
             // EXERCISE
             var ErrorThrower = function (){
-                tooltipFormView.render();
+                tooltipFormView.renderHtml();
             };
 
             // ASSERT
@@ -45,7 +45,7 @@ describe('Tooltip Form View', function() {
 
             // EXERCISE
             var ErrorThrower = function (){
-                tooltipFormView.render();
+                tooltipFormView.renderHtml();
             };
 
             // ASSERT
@@ -59,7 +59,7 @@ describe('Tooltip Form View', function() {
             var tooltipFormView = new TooltipFormView({model: tooltipModel, el: document.body});
 
             // EXERCISE
-            tooltipFormView.render();
+            tooltipFormView.renderHtml();
 
             // ASSERT
             var content = document.getElementsByName("tooltipKey")[0].value;
@@ -73,7 +73,7 @@ describe('Tooltip Form View', function() {
             var tooltipFormView = new TooltipFormView({model: tooltipModel, el: document.body});
 
             // EXERCISE
-            tooltipFormView.render();
+            tooltipFormView.renderHtml();
 
             // ASSERT
             var content = document.getElementsByName("description")[0].value;

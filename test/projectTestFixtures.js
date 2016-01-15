@@ -14,12 +14,8 @@ describe("..:: Intend Test Fixtures ::..", function () {
     importTest('./articleListItemViewTestFixture');
     importTest('./articleRepositoryTestFixture');
     importTest('./articleRequestHandlerTestFixture');
-    importTest('./articleRouterTestFixture');
     importTest('./articleValidatorTestFixture');
-    importTest('./backOfficeRouterTestFixture');
     importTest('./errorBinderTestFixture');
-    importTest('./exerciseRouterTestFixture');
-    importTest('./homeRouterTestFixture');
     importTest('./loginClientSideValidatorTestFixture');
     importTest('./tooltipCollectionViewTestFixture');
     importTest('./tooltipCollectionInjectionViewTestFixture');
@@ -28,9 +24,7 @@ describe("..:: Intend Test Fixtures ::..", function () {
     importTest('./tooltipListItemViewTestFixture');
     importTest('./tooltipRepositoryTestFixture');
     importTest('./tooltipRequestHandlerTestFixture');
-    importTest('./tooltipRouterTestFixture');
     importTest('./tooltipValidatorTestFixture');
     importTest('./userManagerTestFixture');
     importTest('./userRepositoryTestFixture');
-    importTest('./userRouterTestFixture');
 });
