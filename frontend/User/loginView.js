@@ -4,10 +4,16 @@ var _ = require("underscore");
 var fs = require("fs");
 var errorBinder = require("../errorBinder.js");
 var htmlTemplate = fs.readFileSync("frontend/User/login.html", 'utf8');
+var UserModel = require("./userModel.js");
 
 var obj = {
 	events: {
         'submit form': 'submit'
+    },
+    initialize: function (attrs) {
+        if (!attrs.model) {
+            this.model = new UserModel();
+        }
     },
     validateForm: function (e) {
         var username = $('input[name=username]').val();

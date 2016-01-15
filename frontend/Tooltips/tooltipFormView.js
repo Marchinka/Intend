@@ -8,6 +8,11 @@ var TooltipModel = require("./tooltipModel");
 
 var obj = {
     template: _.template(htmlTemplate),
+    initialize: function (attrs) {
+        if (!attrs.model) {
+            this.model = new TooltipModel();
+        }
+    },
     events: {
         'submit form': 'submit',
         'keyup input': 'validateForm',
@@ -33,7 +38,7 @@ var obj = {
             this.model.save(null, {
                 validate: false,
                 success: function() {
-                   Backbone.history.navigate("/Tooltips", { trigger: true }); 
+                   Backbone.history.navigate("/Tooltips", { trigger: true });
                 },
                 error : function(error, response) {
                     var errors = JSON.parse(response.responseText);
@@ -42,10 +47,25 @@ var obj = {
             });
         }
     },
-    render: function(){
+    renderHtml: function() {
         var self = this;
         var attributes = self.model.toJSON();
         self.$el.html(self.template(attributes));
+    },
+    render: function (params) {
+        var self = this;
+        var id = params[0];
+        if (id) {
+            var fetchCallback = function () {
+                self.renderHtml();
+            };
+            self.model.set({ id: id });
+            var options = { reset: true, validate: true, success: fetchCallback };
+            self.model.fetch(options);
+        } else {
+            self.model.set({ id: null, tooltipKey: null, description: null });
+            self.renderHtml();
+        }
     }
 };
 

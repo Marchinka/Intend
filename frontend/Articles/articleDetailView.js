@@ -5,9 +5,15 @@ var fs = require("fs");
 var TooltipCollection = require("../Tooltips/tooltipCollection");
 var TooltipCollectionView = require("../Tooltips/tooltipCollectionInjectionView");
 var htmlTemplate = fs.readFileSync("frontend/Articles/articleDetail.html", 'utf8');
+var ArticleModel = require("./articleModel.js");
 
 var obj = {
     template: _.template(htmlTemplate),
+    initialize: function (attrs) {
+        if (!attrs.model) {
+            this.model = new ArticleModel();
+        }
+    },
     events: {
         "click #deleteArticleButton": function(e) {
             e.preventDefault();
@@ -41,13 +47,24 @@ var obj = {
     addTooltips: function(){
         this.tooltipCollectionView.render();
     },
-    render: function(){
+    renderHtml: function(){
         var self = this;
         var attributes = self.model.toJSON();
         attributes.content = attributes.content.replace(/\n/g, "<br />");
         self.$el.html(self.template(attributes));
-        self.loadTooltips();
-        self.addTooltips();
+
+    },
+    render: function (attrs) {
+        var id = attrs[0];
+        var self = this;
+        var fetchCallback = function () {
+            self.renderHtml();
+            self.loadTooltips();
+            self.addTooltips();
+        };
+        var options = { reset: true, validate: true, success: fetchCallback };
+        self.model.set({ id: id });
+        self.model.fetch(options);
     }
 };
 

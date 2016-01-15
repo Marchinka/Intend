@@ -4,6 +4,7 @@ var _ = require("underscore");
 var fs = require("fs");
 var htmlTemplate = fs.readFileSync("frontend/Articles/articleForm.html", 'utf8');
 var errorBinder = require("../errorBinder.js");
+var ArticleModel = require("./articleModel.js");
 
 var obj = {
     template: _.template(htmlTemplate),
@@ -11,6 +12,11 @@ var obj = {
         'submit form': 'submit',
         'keyup input': 'validateForm',
         'keyup textarea': 'validateForm'
+    },
+    initialize: function (attrs) {
+        if (!attrs.model) {
+            this.model = new ArticleModel();
+        }
     },
     validateForm: function (e) {
         var title = $('input[name=title]').val();
@@ -45,22 +51,23 @@ var obj = {
             });
         }
     },
-    render: function(){
+    renderHtml: function() {
         var self = this;
-
-        if(self.model.get("title") === undefined){
-            throw new Error("title is not defined");
-        }
-
-        if(self.model.get("subTitle") === undefined){
-            throw new Error("subTitle is not defined");
-        }
-        if(self.model.get("content") === undefined){
-            throw new Error("content is not defined");
-        }
-
         var attributes = self.model.toJSON();
         self.$el.html(self.template(attributes));
+    },
+    render: function (attrs) {
+        var self = this;
+        var id = attrs[0];
+        if (id) {
+            self.model.set({ id: id });
+            var options = { reset: true, validate: true, success: function () { self.renderHtml(); } };
+            self.model.fetch(options);
+        }
+        else {
+            self.model.set({ id: null, title: null, subTitle: null, content: null});
+            self.renderHtml();    
+        }
     }
 };
 

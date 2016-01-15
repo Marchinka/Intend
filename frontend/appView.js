@@ -14,35 +14,14 @@ var obj = {
     loaderTimeoutId: 0,
     maxLoaderTimeoutId: 0,
     initialize: function (attrs) {
-        if(attrs.template === undefined || attrs.template === null) {
+        if(!attrs.template) {
+            throw new Error("template is not defined");
+        }
+        if(!attrs.mainRouter) {
             throw new Error("template is not defined");
         }
         this.template = _.template(attrs.template);
-    },
-    deactivateAllTabs: function(){
-        $(".active").each(function(){
-            $(this).removeClass("active");
-        });
-    },
-    activateHomeTab: function(){
-        this.deactivateAllTabs();
-        $("#home-nav-tab").addClass("active");
-    },
-    activateArticlesTab: function(){
-        this.deactivateAllTabs();
-        $("#articles-nav-tab").addClass("active");
-    },
-    activateExercisesTab: function(){
-        this.deactivateAllTabs();
-        $("#exercises-nav-tab").addClass("active");
-    },
-    activateBackOfficeTab: function(){
-        this.deactivateAllTabs();
-        $("#back-office-nav-tab").addClass("active");
-    },
-    activateUserTab: function(){
-        this.deactivateAllTabs();
-        $("#user-nav-tab").addClass("active");
+        this.mainRouter = attrs.mainRouter;
     },
     events: {
         "click a[data-internal]": function(e){
@@ -113,12 +92,33 @@ var obj = {
             self.unRenderLoaderView();
         });
     },
+    addRoute: function (route) {
+        var self = this;
+        this.mainRouter.route(route.routeUrl, route.routeUrl, function () {
+            var args = Array.prototype.slice.call(arguments);
+            self.disposeOfMainCurrentView();
+            self.currentMainView = new route.view({ el: $("#app-content") });
+            self.currentMainView.render(args);
+        });
+        return this;
+    },
+    addRoutes : function(routes) {
+        for (var i in routes) {
+            this.addRoute(routes[i]);
+        }
+        return this;
+    },
+    startApp: function () {
+        Backbone.history.start({pushState: false});
+        return this;
+    },
     render: function() {
         this.$el.html(this.template());
         this.initializeLoaderView();
         this.initializeUserView();
         this.renderUserView();
         this.activateGlobalEvents();
+        return this;
     }
 };
 

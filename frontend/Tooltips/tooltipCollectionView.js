@@ -4,13 +4,17 @@ var _ = require("underscore");
 var fs = require("fs");
 var TooltipListItemView = require("./tooltipListItemView");
 var htmlTemplate = fs.readFileSync("frontend/Tooltips/tooltipCollectionHeader.html", 'utf8');
+var TooltipCollection = require('./tooltipCollection.js');
 
 var TooltipCollectionView = {
     template: _.template(htmlTemplate),
-    initialize: function () {
+    initialize: function (attrs) {
         var self = this;
+        if (!attrs.collection) {
+            self.collection = new TooltipCollection();
+        }
         self.collection.on("destroy", function () {
-            self.render();
+            self.renderHtml();
         });
     },
     addOne : function(modelItem) {
@@ -23,10 +27,18 @@ var TooltipCollectionView = {
     addAll: function() {
         this.render();
     },
-    render: function(){
+    renderHtml: function(){
         var self = this;
         self.$el.html(self.template());
         self.collection.forEach(self.addOne, self);
+    },
+    render: function () {
+        var self = this;
+        var fetchCallback = function () {
+            self.renderHtml();
+        };
+        var options = { reset: true, validate: true, success: fetchCallback };
+        self.collection.fetch(options);        
     }
 };
 
