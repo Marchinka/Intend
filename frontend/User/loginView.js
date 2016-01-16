@@ -37,13 +37,14 @@ var obj = {
             var credentials = { username: username, password: password };
             this.model.login(
                 credentials,
-                function(user) {
-                    self.model.set(user);
+                function() {
                     Backbone.history.navigate("/Home", { trigger: true });
                 },
                 function(response) {
-                    var errors = JSON.parse(response.responseText);
-                    errorBinder.bindErrors(errors);
+                    if (response.status === 500 || response.status === 401) {
+                        var errors = JSON.parse(response.responseText);
+                        errorBinder.bindErrors(errors);
+                    }
                 });
         }
     },

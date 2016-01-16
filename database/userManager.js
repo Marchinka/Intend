@@ -1,6 +1,7 @@
 module.exports = {
 	extend: function (req, res) {
 		res.manageUsernameCookie = function (user) {
+			console.log(user);
 			if (!user) {
 				res.clearCookie('username');
 				return;
