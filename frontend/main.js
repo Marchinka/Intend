@@ -22,11 +22,12 @@ var appView = new AppView({
 	template: htmlTemplate,
 	mainRouter: mainRouter
 });
-appView.addRoutes(homeRoutes)
+appView
+	.render()
+	.addRoutes(homeRoutes)
 	.addRoutes(articleRoutes)
 	.addRoutes(exerciseRoutes)
 	.addRoutes(backOfficeRoutes)
 	.addRoutes(userRoutes)
 	.addRoutes(tooltipRoutes)
-	.render()
 	.startApp();

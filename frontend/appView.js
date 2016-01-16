@@ -49,12 +49,14 @@ var obj = {
             el: userTabElement,
             model: userModel
         });
+        return this;
     },
     initializeLoaderView: function () {
         var loaderElement = this.$el.find('#loader');
         this.loaderView = new LoaderView({
             el: loaderElement
         });
+        return this;
     },
     renderUserView: function () {
         this.userTabView.render();
@@ -97,7 +99,7 @@ var obj = {
         this.mainRouter.route(route.routeUrl, route.routeUrl, function () {
             var args = Array.prototype.slice.call(arguments);
             self.disposeOfMainCurrentView();
-            self.currentMainView = new route.view({ el: $("#app-content") });
+            self.currentMainView = new route.view({ el: $("#app-content"), userModel: self.userTabView.model });
             self.currentMainView.render(args);
         });
         return this;

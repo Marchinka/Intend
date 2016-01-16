@@ -13,10 +13,14 @@ var obj = {
         this.model.on("destroy", this.render, this);
         this.model.on("change", this.render, this);
     },
-    render: function(){
+    renderHtml: function(){
         var self = this;
         var attributes = self.model.toJSON();
-        self.$el.html(self.template(attributes));
+        var html = self.template(attributes);
+        self.$el.html(html);
+    },
+    render: function () {
+        this.renderHtml();
     }
 };
 

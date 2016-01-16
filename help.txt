@@ -7,18 +7,11 @@ WINDOWS - Come setuppare l'ambiente di sviluppo giorno per giorno
 2) Lanciare il task di grunt in watch
 
 	cd Documents\Projects\Web\Intend_new
-	grunt watch
+	grunt dev
 
 3) Preparare le fixtures
 
 	cd Documents\Projects\Web\Intend_new
 	mocha
 
-4) Lanciare mongo db
-
-	cd ..\..\Program Files\MongoDB\Server\3.0\bin
-	mongod
-
-5) Aprire la console di mongo
-
-	cd ..\..\Program Files\MongoDB\Server\3.0\bin
+4) Lanciare mysql

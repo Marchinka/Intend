@@ -10,7 +10,9 @@ var obj = {
         'click #logoutButton': 'logout'
     },
     initialize: function (attrs) {
-        if (!attrs.model) {
+        if (attrs.userModel) {
+            this.model = attrs.userModel;
+        } else if (!attrs.model) {
             this.model = new UserModel();
         }
     },
@@ -23,9 +25,13 @@ var obj = {
         });
     },
     template: _.template(htmlTemplate),
-    render: function(){
+    renderHtml: function(){
         var attributes = this.model.toJSON();
-        this.$el.html(this.template(attributes));
+        var html = this.template(attributes);
+        this.$el.html(html);
+    },
+    render: function () {
+        this.renderHtml();
     }
 };
 

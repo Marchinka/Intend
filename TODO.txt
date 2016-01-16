@@ -1,3 +1,0 @@
-ad ogni callback ajax, rileggere il cookie dell'user name per tenere allineata la vista
-refactoring e test della logica di autenticazione
-refactoring e test della logica di inserimento cookie username
