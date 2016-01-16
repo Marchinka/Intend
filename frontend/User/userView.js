@@ -27,6 +27,10 @@ var obj = {
     template: _.template(htmlTemplate),
     renderHtml: function(){
         var attributes = this.model.toJSON();
+        if (!attributes.username) {
+            Backbone.history.navigate("/Login", { trigger: true });
+            return;
+        }
         var html = this.template(attributes);
         this.$el.html(html);
     },

@@ -59,6 +59,10 @@ module.exports = function (passport) {
 	});
 
 	router.get('/', function(req, res, next) {
+		res.send();
+	});
+
+	router.get('/', function(req, res, next) {
 		if (req.user) {
 			res.send(req.user);
 		} else {

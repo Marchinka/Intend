@@ -22,6 +22,7 @@ var obj = {
         }
         this.template = _.template(attrs.template);
         this.mainRouter = attrs.mainRouter;
+        this.userModel = new UserModel();
     },
     events: {
         "click a[data-internal]": function(e){
@@ -42,14 +43,16 @@ var obj = {
         }
     },
     initializeUserView: function () {
-        var userModel = new UserModel();
-        userModel.fetch();
-        var userTabElement = this.$el.find('#userNavtab');
-        this.userTabView = new UserTabView({
-            el: userTabElement,
-            model: userModel
+        var self = this;
+        self.userModel.getLogin(function () {
+            var userTabElement = self.$el.find('#userNavtab');
+            self.userTabView = new UserTabView({
+                el: userTabElement,
+                model: self.userModel
+            });
+            self.userTabView.render();
+            return self;
         });
-        return this;
     },
     initializeLoaderView: function () {
         var loaderElement = this.$el.find('#loader');
@@ -57,9 +60,6 @@ var obj = {
             el: loaderElement
         });
         return this;
-    },
-    renderUserView: function () {
-        this.userTabView.render();
     },
     unRenderLoaderView: function () {
         var self = this;
@@ -71,12 +71,12 @@ var obj = {
         var self = this;
         self.loaderTimeoutId = setTimeout(function () {
                 self.loaderView.render();    
-            }, config.loaderTimeoutMilliseconds);
+        }, config.loaderTimeoutMilliseconds);
 
-            self.maxLoaderTimeoutId = setTimeout(function () {
-                self.unRenderLoaderView();
-                alert("Problema di connessione");
-            }, config.loaderMaxTimeoutMilliseconds);
+        self.maxLoaderTimeoutId = setTimeout(function () {
+            self.unRenderLoaderView();
+            alert("Problema di connessione");
+        }, config.loaderMaxTimeoutMilliseconds);
     },
     activateGlobalEvents: function () {
         var self = this;
@@ -84,7 +84,7 @@ var obj = {
             self.renderLoaderView();
         });
         $(document).ajaxComplete(function() {
-            self.userTabView.model.fetch();
+            self.userModel.fetch();
             self.unRenderLoaderView();
         });
         $(document).ajaxError(function(event, request, settings) {
@@ -99,7 +99,7 @@ var obj = {
         this.mainRouter.route(route.routeUrl, route.routeUrl, function () {
             var args = Array.prototype.slice.call(arguments);
             self.disposeOfMainCurrentView();
-            self.currentMainView = new route.view({ el: $("#app-content"), userModel: self.userTabView.model });
+            self.currentMainView = new route.view({ el: $("#app-content"), userModel: self.userModel });
             self.currentMainView.render(args);
         });
         return this;
@@ -115,12 +115,12 @@ var obj = {
         return this;
     },
     render: function() {
-        this.$el.html(this.template());
-        this.initializeLoaderView();
-        this.initializeUserView();
-        this.renderUserView();
-        this.activateGlobalEvents();
-        return this;
+        var self = this;
+        self.$el.html(this.template());
+        self.initializeLoaderView();
+        self.initializeUserView();
+        self.activateGlobalEvents();
+        return self;
     }
 };
 

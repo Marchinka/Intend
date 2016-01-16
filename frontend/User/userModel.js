@@ -7,6 +7,16 @@ var LoginValidator = require("../../database/loginClientSideValidator");
 var loginValidator = new LoginValidator();
 
 module.exports = CookieModel.extend({
+    getLogin: function (callback) {
+        $.ajax({
+            url: '/login',
+            type: 'GET',
+            dataType: 'json'
+        })
+        .always(function() {
+            callback();
+        }); 
+    },
 	logout: function (callback) {
         $.ajax({
             url: '/logout',

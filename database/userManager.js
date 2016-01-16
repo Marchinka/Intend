@@ -8,7 +8,7 @@ module.exports = {
 			}
 		    if (user.username) {
 		      	var username = user.username;
-		    	res.cookie('username', { username: username });
+		    	res.cookie('username', { username: username, maxAge: 1000 * 60 * 60 * 24 * 365 /*1 y*/, httpOnly: true });
 		    	return;
 		    } else {
 		    	res.clearCookie('username');

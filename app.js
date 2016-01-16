@@ -10,7 +10,12 @@ var expressSession = require('express-session');
 var userManager = require('./database/userManager');
 var app = express();
 
-app.use(expressSession({ secret: 'watch the sunset at least once per day' }));
+app.use(expressSession({ 
+  secret: 'watch the sunset at least once per day',
+  cookie : {
+      maxAge: 1000 * 60 * 60 * 24 * 365 /*1 y*/
+  } 
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser.json());

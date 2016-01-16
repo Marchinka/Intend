@@ -15,3 +15,6 @@ WINDOWS - Come setuppare l'ambiente di sviluppo giorno per giorno
 	mocha
 
 4) Lanciare mysql
+
+
+bisogna fare una chiamata che risveglia il server quando si entra per la prima volta sulla pagina (a meno che il cookie non sia già popolato)
