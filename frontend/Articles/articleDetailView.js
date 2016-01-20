@@ -50,7 +50,9 @@ var obj = {
     renderHtml: function(){
         var self = this;
         var attributes = self.model.toJSON();
-        attributes.content = attributes.content.replace(/\n/g, "<br />");
+        if (attributes.content) {
+            attributes.content = attributes.content.replace(/\n/g, "<br />");
+        }
         self.$el.html(self.template(attributes));
         self.loadTooltips();
         self.addTooltips();

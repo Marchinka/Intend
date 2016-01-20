@@ -1,0 +1,7 @@
+.bot-visibility {
+	background-color: red;
+}
+
+.bot-user-visibility.bot-visibility {
+	background-color: green;
+}

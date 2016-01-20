@@ -4,10 +4,6 @@
   list-style: none;
 }
 
-.label {
-  vertical-align: baseline;
-}
-
 .btn {
   vertical-align: middle;
 }
@@ -101,6 +97,14 @@ body {
   text-align: initial;
   box-shadow: 0 10px 10px -10px rgba(0,0,0,.8);
   z-index: 20;
+}
+
+.bot-visibility {
+  background-color: red;
+}
+
+.bot-user-visibility.bot-visibility {
+  background-color: green;
 }
 
 /*!
@@ -223,10 +227,6 @@ input::-moz-focus-inner {
 
   .navbar {
     display: none;
-  }
-
-  .label {
-    border: 1px solid #000;
   }
 }
 
@@ -361,7 +361,6 @@ p {
   margin: 0 0 10px;
 }
 
-.label,
 label {
   font-weight: 700;
 }
@@ -1108,24 +1107,6 @@ textarea.form-control {
   cursor: default;
   background-color: #337ab7;
   border-color: #337ab7;
-}
-
-.label {
-  line-height: 1;
-  white-space: nowrap;
-  text-align: center;
-}
-
-.label {
-  display: inline;
-  padding: .2em .6em .3em;
-  font-size: 75%;
-  color: #fff;
-  border-radius: .25em;
-}
-
-.label-danger {
-  background-color: #d9534f;
 }
 
 .list-group-item.active>.badge,

@@ -13,15 +13,20 @@ module.exports = Backbone.Model.extend({
             }
             return this.storageId;
         },
-        fetch: function() {
-            var biscotto = Cookie.get(this.getStorageId());
-            if (!biscotto) {
-                this.clear();
-                return;
+        fetch: function(args) {
+            try {
+                var biscotto = Cookie.get(this.getStorageId());
+                if (!biscotto) {
+                    this.clear();
+                    return;
+                }
+                biscotto = biscotto.replace("j:", "");
+                var object = JSON.parse(biscotto);
+                this.set(object);
+                args.success();
+            } catch (e) {
+                args.error();
             }
-            biscotto = biscotto.replace("j:", "");
-            var object = JSON.parse(biscotto);
-            this.set(object);
         },
         save: function(attributes) {
             Cookie.set(this.getStorageId(), JSON.stringify(this.toJSON()));

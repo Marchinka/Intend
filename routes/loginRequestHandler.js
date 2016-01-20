@@ -8,8 +8,6 @@ module.exports = function (passport) {
 	passport.use(new LocalStrategy(function(username, password, done) { 
 		var userRepository = new UserRepository(databaseConfiguration);
 		var checkUserPassword = function (err, user) {
-			console.log(user);
-			console.log(username + " " + password);
 			if (user === undefined || user === null) {
 				return done(null, false);
 			}
@@ -29,6 +27,7 @@ module.exports = function (passport) {
 	passport.deserializeUser(function(userId, done) { 
 	  	var userRepository = new UserRepository(databaseConfiguration);
 	  	var returnDeserializedUser = function (err, doc) {
+	  		console.log("des"  + JSON.stringify(doc));
 			done(null, doc);
 	  	};
 	  	userRepository.getUserById(userId, returnDeserializedUser);
@@ -50,9 +49,9 @@ module.exports = function (passport) {
 		      			if (err) { 
 		      				return next(err); 
 		      			}
-						var secureUser = { username: user.username };
-						res.manageUsernameCookie(secureUser);
-		      			return res.send(secureUser);
+		      			user.id = undefined;
+						res.manageUsernameCookie(user);
+		      			return res.send(user);
 		    		});
 				}
 	  	})(req, res, next);
@@ -67,7 +66,7 @@ module.exports = function (passport) {
 			res.send(req.user);
 		} else {
 			req.logOut();
-		    res.status(401).send({ message: "Sei uno stronzo"});
+		    res.status(401).send({ message: "Autenticazionefallita"});
 		}
 	});
 

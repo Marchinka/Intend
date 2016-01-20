@@ -1,3 +1,26 @@
-<a data-internal="true" href="/Articles/Create" id="newArticleCreationButton" class="btn btn-danger">
+<button id="newArticleCreationButton" class="btn btn-danger bot-visibility" data-target="#articleCreationModal" data-toggle="modal">
 	Create new Article
-</a>
+</button>
+
+<div class="modal fade bot-visibility" id="articleCreationModal" tabindex="-1" role="dialog" aria-labelledby="creationModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        	<form>
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	                <h4 class="modal-title" id="creationModalLabel">Modal title</h4>
+	            </div>
+	            <div class="modal-body">
+	                <div class="form-group">
+				        <input placeholder="Type in the new article name" type="text" class="form-control error" id="title" name="title" />
+				        <span class="help-block"></span>
+	                </div>
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	                <input type="submit" id="createArticleButton" value="Save" class="btn btn-danger"/>
+	            </div>
+	        </form>
+        </div>
+    </div>
+</div>

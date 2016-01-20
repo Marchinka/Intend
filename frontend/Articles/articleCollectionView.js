@@ -5,6 +5,7 @@ var fs = require("fs");
 var ArticleListItemView = require("./articleListItemView");
 var ArticleCollection = require("./articleCollection.js");
 var htmlTemplate = fs.readFileSync("frontend/Articles/articleCollectionHeader.html", 'utf8');
+var ArticleCreationModalView = require("./articleCreationModalView.js");
 
 var obj = {
     template: _.template(htmlTemplate),
@@ -12,6 +13,7 @@ var obj = {
         if (!attrs.collection) {
             this.collection = new ArticleCollection();
         }
+        this.headerView = new ArticleCreationModalView({ el: this.el });
     },
     addOne : function(modelItem) {
         var view = new ArticleListItemView({ model: modelItem });
@@ -23,7 +25,7 @@ var obj = {
     },
     renderHtml: function() {
         var self = this;
-        self.$el.html(self.template());
+        self.headerView.render();
         self.collection.forEach(self.addOne, self);
     },
     render: function () {

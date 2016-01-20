@@ -84,7 +84,17 @@ var obj = {
             self.renderLoaderView();
         });
         $(document).ajaxComplete(function() {
-            self.userModel.fetch();
+            self.userModel.fetch({
+                success: function () { 
+                    if (self.userModel.get("hasBotPermissions")) {
+                        $("body").addClass('bot-user-visibility');
+                    } else {
+                        $("body").removeClass('bot-user-visibility');
+                    }
+                },
+                error: function () { 
+                    $("body").removeClass('bot-user-visibility');
+                }});
             self.unRenderLoaderView();
         });
         $(document).ajaxError(function(event, request, settings) {
