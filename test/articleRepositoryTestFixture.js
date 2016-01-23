@@ -2,6 +2,7 @@ var chai = require('chai'), spies = require('chai-spies');
 var _ = require("underscore");
 chai.use(spies);
 var expect = chai.expect;
+var FileRepository = require("../database/fileRepository");
 var ArticleRepository = require("../database/articleRepository");
 var mysql =  require('mysql');
 var databaseConfiguration = require("./../database/databaseConfig.js");
@@ -12,14 +13,24 @@ describe('Article Repository', function() {
 		var pool =  mysql.createPool(databaseConfiguration);
 
 		pool.getConnection(function(err, connection) {
-		  	connection.query("delete from article",  function(error, rows, fields){
-		  		if(err)	{
-		  			throw error;
-		  		}
-		  		done();
+		  	connection.query("delete from file",  function(error, rows, fields){
+			  	connection.query("delete from article",  function(error, rows, fields){
+			  		done();
+			  	});
 		  	});
 		  	connection.release();
 		});
+	};
+
+	var getFileJson = function (fileName, articleId) {
+		if (!fileName) {
+			fileName = 'NameOf File';
+		}
+		if (!articleId) {
+			articleId = 1;
+		}
+		var file = { fileName : fileName, articleId: articleId};
+		return file;
 	};
 
     beforeEach(function (done) {
@@ -105,11 +116,13 @@ describe('Article Repository', function() {
         it('Gets correctly article on db', function (done) {
 			// SETUP
 			var articleRepository = new ArticleRepository(databaseConfiguration);
+			var fileRepository = new FileRepository(databaseConfiguration);
             var article = { title : 'ArticleTitle', subTitle: 'ArticleSubTitle', content : 'ArticleContent' };
+            var file = getFileJson();
 
 			// EXERCISE
 			var excerciseFunction = function(err, result){
-				articleRepository.getArticleById(result.insertId, assertionFunction)
+				articleRepository.getArticleById(article.id, assertionFunction)
 			};
 
             // ASSERT
@@ -119,11 +132,16 @@ describe('Article Repository', function() {
 				expect(result.title).to.be.equal(article.title);
 				expect(result.subTitle).to.be.equal(article.subTitle);
 				expect(result.content).to.be.equal(article.content);
+				expect(result.files.length).to.be.equal(1);
+				expect(result.files[0].fileName).to.be.equal(file.fileName);
 				done();
 			};
 
 			// RUN TEST
-			articleRepository.insertArticle(article, excerciseFunction);
+			articleRepository.insertArticle(article, function () {
+				file.articleId = article.id;
+				fileRepository.insertFile(file, excerciseFunction);	
+			});
     	});
    
 

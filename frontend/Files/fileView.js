@@ -18,7 +18,7 @@ var obj = {
         self.$el.html(self.template(attributes));
     },
     render: function (attrs) {
-        self.renderHtml();
+        this.renderHtml();
     }
 };
 

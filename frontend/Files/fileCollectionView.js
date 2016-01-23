@@ -6,11 +6,6 @@ var FileView = require("./fileView");
 var FileCollection = require("./fileCollection.js");
 
 var obj = {
-    initialize: function (attrs) {
-        if (!attrs.collection) {
-            this.collection = new FileCollection();
-        }
-    },
     addOne : function(modelItem) {
         var view = new FileView({ model: modelItem });
         view.render();
@@ -24,7 +19,7 @@ var obj = {
         self.collection.forEach(self.addOne, self);
     },
     render: function () {
-
+        this.renderHtml();
     }
 };
 

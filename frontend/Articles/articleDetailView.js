@@ -6,9 +6,12 @@ var TooltipCollection = require("../Tooltips/tooltipCollection");
 var TooltipCollectionView = require("../Tooltips/tooltipCollectionInjectionView");
 var htmlTemplate = fs.readFileSync("frontend/Articles/articleDetail.html", 'utf8');
 var ArticleModel = require("./articleModel.js");
+var FileCollection = require("./../Files/fileCollection.js");
+var FileCollectionView = require("./../Files/fileCollectionView.js");
 
 var obj = {
     template: _.template(htmlTemplate),
+    fileCollectionView: {},
     initialize: function (attrs) {
         if (!attrs.model) {
             this.model = new ArticleModel();
@@ -54,6 +57,8 @@ var obj = {
             attributes.content = attributes.content.replace(/\n/g, "<br />");
         }
         self.$el.html(self.template(attributes));
+        self.fileCollectionView = new FileCollectionView({ el: $("#file-list"), collection: this.model.Files });
+        self.fileCollectionView.renderHtml();
         self.loadTooltips();
         self.addTooltips();
     },

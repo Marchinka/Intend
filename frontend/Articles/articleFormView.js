@@ -5,9 +5,12 @@ var fs = require("fs");
 var htmlTemplate = fs.readFileSync("frontend/Articles/articleForm.html", 'utf8');
 var errorBinder = require("../errorBinder.js");
 var ArticleModel = require("./articleModel.js");
+var FileCollection = require("./../Files/fileCollection.js");
+var FileCollectionView = require("./../Files/fileCollectionView.js");
 
 var obj = {
     template: _.template(htmlTemplate),
+    fileCollectionView: {},
     events: {
         'submit form': 'submit',
         'keyup input': 'validateForm',
@@ -55,6 +58,8 @@ var obj = {
         var self = this;
         var attributes = self.model.toJSON();
         self.$el.html(self.template(attributes));
+        self.fileCollectionView = new FileCollectionView({ el: $("#file-list"), collection: this.model.Files });
+        self.fileCollectionView.renderHtml();
     },
     render: function (attrs) {
         var self = this;

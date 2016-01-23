@@ -1,8 +1,9 @@
 var mysql =  require('mysql');
+var FileRepository = require("./fileRepository.js");
 
 module.exports = function (databaseConfiguration) {
 	var self = this;
-
+	self.fileRepository = new FileRepository(databaseConfiguration);
 	self.databaseConfiguration = databaseConfiguration;
 
 	self.getArticleById = function (id, callback) {
@@ -14,8 +15,14 @@ module.exports = function (databaseConfiguration) {
 			connection.query('SELECT id, title, subTitle, content FROM article WHERE id = ?', id, function(err, result, fields) {
     			if (!result || result.length === 0) {
 		  			callback(err, null);
+		  			return;
+    			} else {
+	    			var article = result[0];
+		    		connection.query('SELECT id, fileName FROM file WHERE articleId = ? ORDER BY id DESC', id, function(err, rows, fields) {
+		    			article.files = rows;
+			  			callback(err, article);
+					});	
     			}
-		  		callback(err, result[0]);
 			});
 		  	connection.release();
 		});
@@ -49,6 +56,7 @@ module.exports = function (databaseConfiguration) {
 
 	self.insertArticle = function (article, callback) {
 		var pool =  mysql.createPool(databaseConfiguration);
+		delete article.files;
 		pool.getConnection(function(err, connection) {
 			if (!connection) {
 				throw new Error("Error during connection");
@@ -64,6 +72,7 @@ module.exports = function (databaseConfiguration) {
 	};
 
 	self.updateArticle = function (article, callback) {
+		delete article.files;
 		var pool =  mysql.createPool(databaseConfiguration);
 		pool.getConnection(function(err, connection) {
 			if (!connection) {
