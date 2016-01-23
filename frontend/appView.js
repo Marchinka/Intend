@@ -87,13 +87,13 @@ var obj = {
             self.userModel.fetch({
                 success: function () { 
                     if (self.userModel.get("hasBotPermissions")) {
-                        $("body").addClass('bot-user-visibility');
+                        $("body").removeClass('bot-invisible');
                     } else {
-                        $("body").removeClass('bot-user-visibility');
+                        $("body").addClass('bot-invisible');
                     }
                 },
                 error: function () { 
-                    $("body").removeClass('bot-user-visibility');
+                    $("body").addClass('bot-invisible');
                 }});
             self.unRenderLoaderView();
         });

@@ -1,7 +1,5 @@
-.bot-visibility {
-	background-color: red;
-}
+.bot-visibility { }
 
-.bot-user-visibility.bot-visibility {
-	background-color: green;
+.bot-invisible .bot-visibility {
+	display: none !important;
 }

@@ -99,12 +99,8 @@ body {
   z-index: 20;
 }
 
-.bot-visibility {
-  background-color: red;
-}
-
-.bot-user-visibility.bot-visibility {
-  background-color: green;
+.bot-invisible .bot-visibility {
+  display: none!important;
 }
 
 /*!

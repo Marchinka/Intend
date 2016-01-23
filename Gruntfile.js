@@ -87,7 +87,8 @@ module.exports = function (grunt) {
                         '.carousel-inner > .prev.right',
                         '.carousel-inner > .active.left',
                         '.carousel-inner > .active.right',
-                        '.bot-user-visibility.bot-visibility']
+                        '.bot-visibility',
+                        '.bot-invisible .bot-visibility']
                 },
                 files: {
                     'public/stylesheets/app-bundle.css': ['public/index.html', "frontend/*.html", "frontend/**/*.html"]
