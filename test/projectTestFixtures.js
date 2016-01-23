@@ -16,6 +16,8 @@ describe("..:: Intend Test Fixtures ::..", function () {
     importTest('./articleRequestHandlerTestFixture');
     importTest('./articleValidatorTestFixture');
     importTest('./errorBinderTestFixture');
+    importTest('./fileCollectionViewTestFixture.js');
+    importTest('./fileViewTestFixture.js');
     importTest('./fullArticleValidatorTestFixture');
     importTest('./loginClientSideValidatorTestFixture');
     importTest('./tooltipCollectionViewTestFixture');

@@ -13,9 +13,6 @@ var TooltipCollectionView = {
         if (!attrs.collection) {
             self.collection = new TooltipCollection();
         }
-        self.collection.on("destroy", function () {
-            self.renderHtml();
-        });
     },
     addOne : function(modelItem) {
         var view = new TooltipListItemView({ 

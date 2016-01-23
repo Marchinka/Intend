@@ -10,6 +10,13 @@ var TooltipListItemView = {
         'keyup input': 'validateForm',
         'keyup textarea': 'validateForm'
     },
+    initialize: function () {
+        var self = this;
+        self.model.on('destroy', function() {
+            console.log(self.el);
+            self.remove();
+        });
+    },
     deleteTooltip: function(e) {
         e.stopPropagation();
         this.model.destroy({

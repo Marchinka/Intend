@@ -167,8 +167,8 @@ describe('Article Repository', function() {
 			var assertionFunction = function (error, result) {
 				expect(error).to.be.null;
 				expect(result.length).to.be.equal(2);
-				expect(result[0].title).to.be.equal(firstArticle.title);
-				expect(result[1].title).to.be.equal(secondArticle.title);
+				expect(result[0].title).to.be.equal(secondArticle.title);
+				expect(result[1].title).to.be.equal(firstArticle.title);
 				done();
 			};
 
