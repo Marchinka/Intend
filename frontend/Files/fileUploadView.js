@@ -26,6 +26,7 @@ var obj = {
 	        	var articleId = self.articleModel.id;
     			var fileName = $('#file-input').val();
     			var bytes = e.target.result;
+    			console.log(JSON.stringify(bytes));
     			self.fileModel.set({ fileName: fileName });
 				self.fileModel.set({ articleId: articleId });
 				self.fileModel.set({ bytes: bytes });
@@ -49,3 +50,4 @@ var obj = {
 };
 
 module.exports = Backbone.View.extend(obj);
+

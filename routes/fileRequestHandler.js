@@ -3,7 +3,7 @@ var router = express.Router();
 var databaseConfiguration = require("./../database/databaseConfig.js");
 var FileRepository = require("./../database/fileRepository.js");
 
-router.handleArticlePost = function(req, res, next) {
+router.handleFilePost = function(req, res, next) {
 	if (!req.userHasBotPermissions()) {
 		res.status(403).send("Non fare il cornuto");
 		return;
@@ -12,8 +12,6 @@ router.handleArticlePost = function(req, res, next) {
 	var file = req.body;
 	var shortFileName = file.fileName.replace(/^.*[\\\/]/, '');
 	file.fileName = shortFileName;
-
-	console.log(JSON.stringify(file));
 	var fileRepository = new FileRepository(databaseConfiguration);
 	fileRepository.insertFile(
 		file, 
@@ -27,6 +25,25 @@ router.handleArticlePost = function(req, res, next) {
 		});
 };
 
-router.post('/', router.handleArticlePost);
+router.post('/', router.handleFilePost);
+
+router.handleFileGet = function(req, res, next) {
+	console.log("ci siamo");
+	var fileRepository = new FileRepository(databaseConfiguration);
+	fileRepository.getFileById(
+		req.params.id, 
+		function(err, file) {
+			if (err !== null) {
+				res.status(500).send(err);
+			} else {
+				var filename = file.fileName;
+				var content = file.bytes;
+  				res.attachment(filename);
+  				res.end(content, 'UTF-8');
+			}
+	    });
+};
+
+router.get('/:id', router.handleFileGet);
 
 module.exports = router;

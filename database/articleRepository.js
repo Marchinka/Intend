@@ -47,7 +47,7 @@ module.exports = function (databaseConfiguration) {
 			if (!connection) {
 				throw new Error("Error during connection");
 			}
-			connection.query('DELETE FROM article WHERE id = ?', id, function(err, result) {
+			connection.query('DELETE FROM file WHERE articleId = ?; DELETE FROM article WHERE id = ?;', [id, id], function(err, result) {
 		  		callback(err, result);
 			});
 		  	connection.release();

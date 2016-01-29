@@ -1,1 +1,5 @@
-<p id="file<%= id %>"><%= fileName %></p>
+<p id="file<%= id %>">
+	<%= fileName %>&nbsp;
+	<a href="/Files/<%= id %>" id="download-button" class="btn btn-default"><span class="fa fa-download">&nbsp;</span></a>
+	<button id="delete-button" class="btn btn-default bot-visibility"><span class="fa fa-trash">&nbsp;</span></button>
+</p>

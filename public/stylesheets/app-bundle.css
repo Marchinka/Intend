@@ -1594,6 +1594,10 @@ button.close {
   content: "\f007";
 }
 
+.fa-download:before {
+  content: "\f019";
+}
+
 .fa-camera:before {
   content: "\f030";
 }
@@ -1616,4 +1620,8 @@ button.close {
 
 .fa-gamepad:before {
   content: "\f11b";
+}
+
+.fa-trash:before {
+  content: "\f1f8";
 }

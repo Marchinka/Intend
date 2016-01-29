@@ -12,6 +12,21 @@ var obj = {
             this.model = new FileModel();
         }
     },
+    events: {
+        // "click #download-button": function(e) {
+        //     var self = this;
+        //     e.preventDefault();
+        //     self.model.fetch(null, {
+        //         success: function () {
+        //             var file = new File([new Blob()], "image.png", {type:"image/png"});
+        //         }
+        //     });
+        // },
+        "click #delete-button": function(e) {
+            e.preventDefault();
+            alert("Ancora non funziona");
+        },
+    },
     renderHtml: function(){
         var self = this;
         var attributes = self.model.toJSON();

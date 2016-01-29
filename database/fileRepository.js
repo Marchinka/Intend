@@ -5,6 +5,25 @@ module.exports = function (databaseConfiguration) {
 
 	self.databaseConfiguration = databaseConfiguration;
 
+	self.getFileById = function (id, callback) {
+		var pool =  mysql.createPool(databaseConfiguration);
+		pool.getConnection(function(err, connection) {
+			if (!connection) {
+				throw new Error("Error during connection");
+			}
+			connection.query('SELECT * FROM file WHERE id = ?', id, function(err, result, fields) {
+    			if (!result || result.length === 0) {
+		  			callback(err, null);
+		  			return;
+    			} else {
+	    			var file = result[0];
+			  		callback(err, file);
+    			}
+			});
+		  	connection.release();
+		});
+	};
+
 	self.getArticleFiles = function (articleId, callback) {
 		var pool =  mysql.createPool(databaseConfiguration);
 		pool.getConnection(function(err, connection) {
