@@ -1,5 +1,3 @@
-var brfs = require('brfs');
-
 module.exports = function (grunt) {
 
     // Project configuration.
@@ -24,7 +22,8 @@ module.exports = function (grunt) {
         browserify: {
             main: {
                 options: {
-                    transform: [brfs],
+                    transform: [require('grunt-react').browserify, require('brfs')],
+                    extensions: ['.jsx'],
                     browserifyOptions: {
                         debug: true,
                     },
@@ -103,7 +102,9 @@ module.exports = function (grunt) {
                     'database/*.js',
                     'routes/*.js',
                     'frontend/*.js',
+                    'frontend/*.jsx',
                     'frontend/**/*.js',
+                    'frontend/**/*.jsx',
                     'frontend/*.css',
                     'frontend/**/*.css',
                     'frontend/*.html',
