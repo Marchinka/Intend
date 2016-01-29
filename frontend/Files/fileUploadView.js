@@ -20,8 +20,8 @@ var obj = {
 	    if (file) {
 	        var reader = new FileReader();
 	        //reader.readAsText(file);
-	        //reader.readAsBinaryString(file);
-	        reader.readAsArrayBuffer(file);
+	        reader.readAsBinaryString(file);
+	        //reader.readAsArrayBuffer(file);
 	        reader.onload = function(e) {
 	        	var articleId = self.articleModel.id;
     			var fileName = $('#file-input').val();
@@ -29,7 +29,14 @@ var obj = {
     			self.fileModel.set({ fileName: fileName });
 				self.fileModel.set({ articleId: articleId });
 				self.fileModel.set({ bytes: bytes });
-	            alert(e.target.result);
+	            self.fileModel.save(null, {
+                	success: function() {
+                    	alert("successo");
+                	},
+                	error : function(error, response) {
+                    	alert("errore");
+                	}
+            	});
 	        };
 	    }
     },

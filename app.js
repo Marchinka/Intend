@@ -34,6 +34,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 var loginRequestHandler = require('./routes/loginRequestHandler')(passport);
 var logoutRequestHandler = require('./routes/logoutRequestHandler');
 var articleRequestHandler = require('./routes/articleRequestHandler');
+var fileRequestHandler = require('./routes/fileRequestHandler');
 var tooltipRequestHandler = require('./routes/tooltipRequestHandler');
 
 app.use(function(req, res, next) {
@@ -45,6 +46,7 @@ app.use(function(req, res, next) {
 app.use('/login', loginRequestHandler);
 app.use('/logout', logoutRequestHandler);
 app.use('/articles', articleRequestHandler);
+app.use('/files', fileRequestHandler);
 app.use('/tooltips', tooltipRequestHandler);
 
 // catch 404 and forward to error handler
@@ -53,7 +55,6 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
-
 // error handlers
 
 // development error handler

@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var MongoClient = require("mongodb").MongoClient;
 var assert = require("assert");
-var ObjectID = require("mongodb").ObjectID;
 var databaseConfiguration = require("./../database/databaseConfig.js");
 var ArticleRepository = require("./../database/articleRepository.js");
 var ArticleValidator = require("./../database/articleValidator");
