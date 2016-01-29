@@ -5,7 +5,9 @@ var fs = require("fs");
 var htmlTemplate = fs.readFileSync("frontend/Articles/articleForm.html", 'utf8');
 var errorBinder = require("../errorBinder.js");
 var ArticleModel = require("./articleModel.js");
+var FileModel = require("./../Files/fileModel.js");
 var FileCollection = require("./../Files/fileCollection.js");
+var FileUploadView = require("./../Files/fileUploadView.js");
 var FileCollectionView = require("./../Files/fileCollectionView.js");
 
 var obj = {
@@ -58,7 +60,9 @@ var obj = {
         var self = this;
         var attributes = self.model.toJSON();
         self.$el.html(self.template(attributes));
+        self.fileUploadView = new FileUploadView({ el: $("#file-upload"), articleModel: this.model, fileModel: new FileModel() });
         self.fileCollectionView = new FileCollectionView({ el: $("#file-list"), collection: this.model.Files });
+        self.fileUploadView.renderHtml();
         self.fileCollectionView.renderHtml();
     },
     render: function (attrs) {

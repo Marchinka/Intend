@@ -1,14 +1,20 @@
-<!-- Article lookup -->
 <div id="article<%= id %>">
+    <!--Article Title-->
     <h1 id="articleTitle"><%= title %></h1>
+
+    <!--Article SubTitle-->
     <h2 id="articleSubTitle"><%= subTitle %></h2>
+
+    <!--Article Content-->
     <p id="articleContent" class="tooltip-text"><%= content %></p>
 
     <hr />  
     <h4>Files</h2>
-    <div id="file-list"></div>
-    <hr />  
+    <div id="file-list">
+        <!--File List Content-->
+    </div>
 
+    <!--Article Option Buttons-->
     <a class="btn btn-default" data-internal="true" href="/Articles">Back to List</a>
     <a class="btn btn-default bot-visibility" data-internal="true" href="/Articles/Update/<%= id %>">Update Article</a>
     <button type="button" class="btn btn-danger bot-visibility" data-toggle="modal" data-target="#article<%= id %>DeleteModal">

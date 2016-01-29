@@ -12,6 +12,7 @@ var FileCollectionView = require("./../Files/fileCollectionView.js");
 var obj = {
     template: _.template(htmlTemplate),
     fileCollectionView: {},
+    fileUploadView: {},
     initialize: function (attrs) {
         if (!attrs.model) {
             this.model = new ArticleModel();
@@ -57,7 +58,7 @@ var obj = {
             attributes.content = attributes.content.replace(/\n/g, "<br />");
         }
         self.$el.html(self.template(attributes));
-        self.fileCollectionView = new FileCollectionView({ el: $("#file-list"), collection: this.model.Files });
+        self.fileCollectionView = new FileCollectionView({ el: $("#file-list") });
         self.fileCollectionView.renderHtml();
         self.loadTooltips();
         self.addTooltips();

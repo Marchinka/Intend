@@ -399,7 +399,9 @@ ul {
   margin-left: -15px;
 }
 
-.col-md-4 {
+.col-md-4,
+.col-md-5,
+.col-md-7 {
   position: relative;
   min-height: 1px;
   padding-right: 15px;
@@ -407,8 +409,18 @@ ul {
 }
 
 @media (min-width:992px) {
-  .col-md-4 {
+  .col-md-4,
+  .col-md-5,
+  .col-md-7 {
     float: left;
+  }
+
+  .col-md-7 {
+    width: 58.33333333%;
+  }
+
+  .col-md-5 {
+    width: 41.66666667%;
   }
 
   .col-md-4 {
@@ -450,6 +462,16 @@ label {
   line-height: 1.42857143;
   color: #555;
   display: block;
+}
+
+input[type=file] {
+  display: block;
+}
+
+input[type=file]:focus {
+  outline: dotted thin;
+  outline: -webkit-focus-ring-color auto 5px;
+  outline-offset: -2px;
 }
 
 .form-control {
