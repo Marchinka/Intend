@@ -13,7 +13,6 @@ var TooltipListItemView = {
     initialize: function () {
         var self = this;
         self.model.on('destroy', function() {
-            console.log(self.el);
             self.remove();
         });
     },

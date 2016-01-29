@@ -8,23 +8,19 @@ var FileModel = require("./fileModel.js");
 var obj = {
     template: _.template(htmlTemplate),
     initialize: function (attrs) {
+        var self = this;
         if (!attrs.model) {
-            this.model = new FileModel();
+            self.model = new FileModel();
         }
+        self.model.on('destroy', function() {
+            self.remove();
+        });
     },
     events: {
-        // "click #download-button": function(e) {
-        //     var self = this;
-        //     e.preventDefault();
-        //     self.model.fetch(null, {
-        //         success: function () {
-        //             var file = new File([new Blob()], "image.png", {type:"image/png"});
-        //         }
-        //     });
-        // },
         "click #delete-button": function(e) {
-            e.preventDefault();
-            alert("Ancora non funziona");
+             var self = this;
+             e.preventDefault();
+             self.model.destroy();
         },
     },
     renderHtml: function(){
