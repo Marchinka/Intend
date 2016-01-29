@@ -46,4 +46,24 @@ router.handleFileGet = function(req, res, next) {
 
 router.get('/:id', router.handleFileGet);
 
+router.handleFileDelete = function(req, res, next) {
+	if (!req.userHasBotPermissions()) {
+		res.status(403).send("Non fare il cornuto");
+		return;
+	}
+
+	var fileRepository = new FileRepository(databaseConfiguration);
+	fileRepository.deleteFileById(
+		req.params.id, 
+		function(err, doc) {
+			if (err !== null) {
+				res.status(500).send(err);
+			}else {
+				res.send(doc);
+			}
+		});
+};
+
+router.delete('/:id', router.handleFileDelete);
+
 module.exports = router;
