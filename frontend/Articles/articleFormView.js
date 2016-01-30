@@ -58,17 +58,23 @@ var obj = {
     },
     renderHtml: function() {
         var self = this;
+        
+        // Render main view
         var attributes = self.model.toJSON();
         self.$el.html(self.template(attributes));
+
+        // Render file upload content
         self.fileUploadView = new FileUploadView({ 
             el: $("#file-upload"), 
             articleModel: this.model, 
             fileModel: new FileModel(), 
             fileCollection: this.model.Files });
+        self.fileUploadView.renderHtml();
+
+        // Render file list content
         self.fileCollectionView = new FileCollectionView({ 
             el: $("#file-list"), 
             collection: this.model.Files });
-        self.fileUploadView.renderHtml();
         self.fileCollectionView.renderHtml();
     },
     render: function (attrs) {

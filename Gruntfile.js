@@ -119,7 +119,8 @@ module.exports = function (grunt) {
         express: {
             dev: {
                 options: {
-                    script: './app.js'
+                    script: './app.js',
+                    keepAlive: true
                 }
             }
         },
@@ -147,4 +148,5 @@ module.exports = function (grunt) {
     grunt.registerTask('rebuild-dev', ['jshint', 'clean', 'copy', 'browserify', 'cssmin:concatDist', 'uncss']);
     grunt.registerTask('rebuild-prod', ['jshint', 'clean', 'copy', 'browserify', 'cssmin:concatDist', 'uncss', 'uglify', 'cssmin:minifyDist']);
     grunt.registerTask('dev', ['express', 'rebuild-dev', 'watch']);
+    grunt.registerTask('server', ['express', 'express-keepalive']);
 };

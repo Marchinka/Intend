@@ -13,20 +13,21 @@ var userRoutes = require("./User/userRoutes.js");
 var backOfficeRoutes = require("./BackOffice/backOfficeRoutes.js");
 var tooltipRoutes = require("./Tooltips/tooltipRoutes.js");
 var fs = require("fs");
-
 var htmlTemplate = fs.readFileSync("frontend/app.html", 'utf8');
 
-var mainRouter = new MainRouter({});
-var appView = new AppView({ 
-	el: document.body, 
-	template: htmlTemplate,
-	mainRouter: mainRouter
+$( document ).ready(function() {   
+	var mainRouter = new MainRouter({});
+	var appView = new AppView({ 
+		el: document.body, 
+		template: htmlTemplate,
+		mainRouter: mainRouter
+	});
+	appView.addRoutes(homeRoutes)
+		.addRoutes(articleRoutes)
+		.addRoutes(exerciseRoutes)
+		.addRoutes(backOfficeRoutes)
+		.addRoutes(userRoutes)
+		.addRoutes(tooltipRoutes)
+		.render()
+		.startApp(); 
 });
-appView.addRoutes(homeRoutes)
-	.addRoutes(articleRoutes)
-	.addRoutes(exerciseRoutes)
-	.addRoutes(backOfficeRoutes)
-	.addRoutes(userRoutes)
-	.addRoutes(tooltipRoutes)
-	.render()
-	.startApp();

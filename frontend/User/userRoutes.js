@@ -1,4 +1,4 @@
-var LoginView = require("./loginView.js");
+var LoginView = require("./loginView.jsx");
 var UserView = require("./userView.js");
 var UnauthorizedView = require("./unauthorizedView.js");
 

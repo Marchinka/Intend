@@ -3,7 +3,6 @@ var Backbone = require("backbone");
 var _ = require("underscore");
 var fs = require("fs");
 var htmlTemplate = fs.readFileSync("./frontend/User/userTab.html", 'utf8');
-var LoginView = require("./loginView");
 var UserModel = require("./userModel");
 
 var obj = {

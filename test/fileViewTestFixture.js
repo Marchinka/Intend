@@ -109,7 +109,7 @@ describe('File View', function() {
             // ASSERT
             var testSelector = 'p#file' + fileJson.id;
             var element = $(testSelector);
-            expect(element.html()).to.be.equal(fileJson.fileName);
+            expect(element.html()).to.contain(fileJson.fileName);
         });
     });
 });
