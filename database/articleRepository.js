@@ -34,7 +34,7 @@ module.exports = function (databaseConfiguration) {
 			if (!connection) {
 				throw new Error("Error during connection");
 			}
-			connection.query('SELECT id, title, subTitle, content FROM article ORDER BY id DESC', function(err, rows, fields) {
+			connection.query('SELECT id, title, subTitle, LEFT(content, 800) as content FROM article ORDER BY id DESC', function(err, rows, fields) {
 		  		callback(err, rows);
 			});
 		  	connection.release();

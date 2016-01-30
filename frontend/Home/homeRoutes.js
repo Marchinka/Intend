@@ -1,4 +1,4 @@
-var HomeView = require("./homeViewReact.jsx");
+var HomeView = require("./homeMainView.js");
 
 module.exports = [
 	{ routeUrl: "Home", view: HomeView },

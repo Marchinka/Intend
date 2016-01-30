@@ -1,23 +1,15 @@
 window.$ = window.jQuery = require('jquery');
 var Backbone = require("backbone");
 var _ = require("underscore");
-var fs = require("fs");
 var React = require('react');
 var ReactDOM = require('react-dom');
-var htmlTemplate = fs.readFileSync("frontend/Home/home.html", 'utf8');
+var HomeJumbotron  = require('./homeJumbotron.jsx');
 
 var obj = {
-    template: _.template(htmlTemplate),
     renderHtml: function() {
       ReactDOM.render(
       <div id="home-content">
-          <div className="jumbotron">
-            <div className="container">
-              <h1>Home Page with React</h1>
-              <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-              <p><a className="btn btn-warning btn-lg" href="#" role="button">Learn more &raquo;</a></p>
-            </div>
-          </div>
+          <HomeJumbotron />
 
           <div className="container">
             <div className="row">
@@ -49,7 +41,7 @@ var obj = {
 		  );
     },
     render: function () {
-    	this.renderHtml();
+      this.renderHtml();
     }
 };
 
